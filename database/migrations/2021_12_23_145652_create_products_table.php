@@ -19,7 +19,7 @@ class CreateProductsTable extends Migration
             $table->integer('stock');
             $table->integer('avilable');
             $table->integer('sold');
-            $table->integer('idcategory');      
+            $table->foreignId('idcategory');      
             $table->timestamps();
         });
     }
