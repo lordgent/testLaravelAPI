@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Http\Request;
-use App\Models\Category;
-use Illuminate\Support\Facades\Validator;
 
+use App\Models\Category;
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 class CategoryController extends Controller
 {
     public function index() {
@@ -39,7 +40,32 @@ class CategoryController extends Controller
             'data' => $category
         ]);
     }
-    public function update($id) {
+    public function update(Request $request,$id) {
+
+        $product=Category::find($id);
+        $product->update($request->all());
+        return response()->json([
+            "status" => "success",
+            "message" => "update Success"
+        ], 200);
+    }
+    public function destroy($id)
+    {
+
+        $category = Category::find($id);
+        if($category) {
+             $destroy = Category::destroy($id);
+             return response()->json([
+                "status" => "success",
+                "message" => "Delete Success"
+            ], 200);
+    
+        }
+        return response()->json([
+            "status" => "failed",
+            "message" => "Category Not Found"
+        ], 400);
 
     }
+
 }

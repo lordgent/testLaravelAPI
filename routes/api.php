@@ -1,8 +1,9 @@
 <?php
 
 
-use App\Http\Controllers\productController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\TransationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,14 +23,17 @@ use Illuminate\Support\Facades\Route;
 // });
 // Route::post('register', 'Auth/Register');
 
-Route::get('products', [productController::class,'index']);
-Route::post('product', [productController::class, 'store']);
-Route::get('product/{id}', [productController::class, 'show']);
-Route::put('product/{id}', [productController::class, 'update']);
-Route::delete('product/{id}', [productController::class, 'destroy']);
-Route::get("producttitle", [productController::class, 'titleCategory']);
-// Category
+Route::get('products', [ProductController::class,'index']);
+Route::post('product', [ProductController::class, 'create']);
+Route::put('product/{id}', [ProductController::class, 'update']);
+Route::delete('product/{id}', [ProductController::class, 'destroy']);
+
+// // Category
 Route::get('categories', [CategoryController::class,'index']);
 Route::post('category', [CategoryController::class, 'create']);
+Route::put('category/{id}', [CategoryController::class, 'update']);
+Route::delete('category/{id}', [CategoryController::class, 'destroy']);
 
 // Transaction
+Route::post('transaction', [TransationController::class, 'create']);
+Route::get('transactions', [TransationController::class, 'index']);
